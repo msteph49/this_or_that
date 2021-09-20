@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
-    has_many :choices
+    has_many :choices, dependent: :destroy
+    has_many :votes, through: :choices
 
     validates :title, presence: true
     validates :choices, length: {minimum: 2, maximum: 2}
