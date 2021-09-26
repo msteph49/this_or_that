@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :update, :destroy]
+  before_action :set_category, only: [:show, :update, :vote, :destroy]
 
   # GET /categories
   def index
@@ -38,6 +38,15 @@ class CategoriesController < ApplicationController
     @category.destroy
   end
 
+  def vote
+    @vote = @category.votes.new(votes_params)
+    if @vote.save
+      render json: @vote
+    else
+      render json: @vote.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
@@ -47,5 +56,9 @@ class CategoriesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def category_params
       params.require(:category).permit(:title, choices_attributes: [:title])
+    end
+
+    def votes_params
+      params.permit(:choice_id)
     end
 end
