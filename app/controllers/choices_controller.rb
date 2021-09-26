@@ -1,5 +1,5 @@
 class ChoicesController < ApplicationController
-  before_action :set_choice, only: [:show, :update, :destroy]
+  before_action :set_choice, only: [:show, :update, :votes, :destroy]
 
   # GET /choices
   def index
@@ -36,6 +36,10 @@ class ChoicesController < ApplicationController
   # DELETE /choices/1
   def destroy
     @choice.destroy
+  end
+
+  def votes
+    render json: {count: @choice.votes.count}
   end
 
   private
