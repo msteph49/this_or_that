@@ -4,7 +4,7 @@ class Choice < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   validates :title, presence: true
-  validates :number_of_choices
+  validate :number_of_choices
 
   def popularity
     votes.count
