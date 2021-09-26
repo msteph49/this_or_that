@@ -6,4 +6,8 @@ class Category < ApplicationRecord
     validates :choices, length: {minimum: 2, maximum: 2}
 
     accepts_nested_attributes_for :choices
+
+    def popularity
+        votes.count
+    end
 end
