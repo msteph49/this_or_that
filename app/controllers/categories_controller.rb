@@ -55,7 +55,7 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:title, choices_attributes: [:title])
+      params.require(:category).permit(:title, :image_url, choices_attributes: [:title, :image_url])
     end
 
     def votes_params
